@@ -1,2 +1,1 @@
-java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000 -jar taskspring.jar
-```
+java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n -jar taskspring.jar

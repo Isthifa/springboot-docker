@@ -38,16 +38,17 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public String updatePerson(PersonDTO personDTO) {
-        Person person = Person.builder()
-                .firstName(personDTO.getFirstName())
-                .lastName(personDTO.getLastName())
-                .address(personDTO.getAddress())
-                .city(personDTO.getCity())
-                .state(personDTO.getState())
-                .zip(personDTO.getZip())
-                .build();
-        personRepository.save(person);
+    public String updatePerson(Person persons) {
+        Optional<Person> person = personRepository.findById(persons.getPersonId());
+                person.stream().forEach(person1 -> {
+                    person1.setFirstName(persons.getFirstName());
+                    person1.setLastName(persons.getLastName());
+                    person1.setAddress(persons.getAddress());
+                    person1.setCity(persons.getCity());
+                    person1.setState(persons.getState());
+                    person1.setZip(persons.getZip());
+                });
+        personRepository.save(person.get());
         return "Person updated successfully";
     }
 

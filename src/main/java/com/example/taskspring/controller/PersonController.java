@@ -1,8 +1,10 @@
 package com.example.taskspring.controller;
 
 import com.example.taskspring.dto.PersonDTO;
+import com.example.taskspring.entity.Person;
 import com.example.taskspring.services.PersonService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,28 +21,28 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public PersonDTO getPerson(@PathVariable long id){
-        return personService.getPerson(id);
+    public ResponseEntity<PersonDTO> getPerson(@PathVariable long id){
+        return ResponseEntity.ok(personService.getPerson(id));
     }
 
     @DeleteMapping("/{id}")
-    public String deletePerson(@PathVariable long id){
-        return personService.deletePerson(id);
+    public ResponseEntity<String> deletePerson(@PathVariable long id){
+        return ResponseEntity.ok(personService.deletePerson(id));
     }
 
     @PostMapping("/create")
-    public String createPerson(@RequestBody @Valid PersonDTO personDTO){
-        return personService.createPerson(personDTO);
+    public ResponseEntity<String> createPerson(@RequestBody @Valid PersonDTO personDTO){
+        return ResponseEntity.ok(personService.createPerson(personDTO));
     }
 
     @PutMapping("/update")
-    public String updatePerson(@RequestBody PersonDTO personDTO){
-        return personService.updatePerson(personDTO);
+    public ResponseEntity<String> updatePerson(@RequestBody Person personDTO){
+        return ResponseEntity.ok(personService.updatePerson(personDTO));
     }
 
     @GetMapping("/all")
-    public List<PersonDTO> getPersons(){
-        return personService.getPersons();
+    public ResponseEntity<List<PersonDTO>> getPersons(){
+        return ResponseEntity.ok(personService.getPersons());
     }
 
 

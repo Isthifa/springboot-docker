@@ -10,10 +10,36 @@ services:
         SPRING_DATASOURCE_USERNAME: root
         SPRING_DATASOURCE_PASSWORD: root
     ports:
-        - "3307:3306"
+        - "3309:3306"
 
   mongodb:
     image: mongo:latest
     restart: always
     ports:
       - "27018:27017"
+
+
+
+  springtask-docker:
+      image: springtask-docker
+      ports:
+        - "8080:8080"
+        - "8000:8000"
+      environment:
+        MYSQL_HOST: mysqldb
+        MYSQL_USER: root
+        MYSQL_PASSWORD: root
+        MYSQL_PORT: 3306
+        MONGO_DB_HOST: mongodb   # MongoDB host
+        MONGO_DB_PORT: 27017     # MongoDB port
+      networks:
+          - spring-network
+      volumes:
+        - ./target/taskspring.jar:/taskspring.jar
+        - ./entrypoint.sh:/entrypoint.sh
+      entrypoint: [ "sh", "/entrypoint.sh" ]
+
+networks:
+   spring-network:
+      external: true
+

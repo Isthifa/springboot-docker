@@ -2,6 +2,7 @@ package com.example.taskspring.services;
 
 import com.example.taskspring.dto.PersonDTO;
 import com.example.taskspring.entity.Blog;
+import com.example.taskspring.entity.Person;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface PersonService {
 
     String createPerson(PersonDTO personDTO);
 
-    String updatePerson(PersonDTO personDTO);
+    String updatePerson(Person person);
 
     String deletePerson(long id);
 
